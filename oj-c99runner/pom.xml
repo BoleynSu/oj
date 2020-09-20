@@ -4,19 +4,19 @@
 	<parent>
 		<groupId>su.boleyn.oj</groupId>
 		<artifactId>oj</artifactId>
-		<version>1.0.4</version>
+		<version>1.0.5</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<name>Boleyn Su's Online Judge (${project.artifactId})</name>
 	<groupId>su.boleyn.oj</groupId>
 	<artifactId>oj-c99runner</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 
 	<dependencies>
 		<dependency>
 			<groupId>su.boleyn.oj</groupId>
 			<artifactId>oj-judge</artifactId>
-			<version>1.0.4</version>
+			<version>1.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>

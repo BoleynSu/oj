@@ -5,7 +5,7 @@
 	<name>Boleyn Su's Online Judge (${project.artifactId})</name>
 	<groupId>su.boleyn.oj</groupId>
 	<artifactId>oj</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<packaging>pom</packaging>
 
 	<description>Yet another online judge system</description>
