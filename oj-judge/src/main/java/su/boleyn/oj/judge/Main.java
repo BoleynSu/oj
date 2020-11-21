@@ -8,9 +8,6 @@ import io.grpc.ManagedChannelBuilder;
 import su.boleyn.oj.core.Config;
 import su.boleyn.oj.core.FileUtils;
 import su.boleyn.oj.core.SQL;
-import su.boleyn.oj.judge.proto.Result;
-import su.boleyn.oj.judge.proto.RunnerGrpc;
-import su.boleyn.oj.judge.proto.Task;
 
 public class Main extends Config {
 	private static final String RUNNER_HOST = getOrElse("RUNNER_HOST", "localhost");
