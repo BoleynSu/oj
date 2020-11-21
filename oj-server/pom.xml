@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>su.boleyn.oj</groupId>
 		<artifactId>oj</artifactId>
-		<version>1.0.7-SNAPSHOT</version>
+		<version>1.1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>su.boleyn.oj</groupId>
 	<artifactId>oj-server</artifactId>
-	<version>1.0.7-SNAPSHOT</version>
+	<version>1.1.0</version>
 
 	<name>Boleyn Su's Online Judge (oj-server)</name>
 
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>su.boleyn.oj</groupId>
 			<artifactId>oj-core</artifactId>
-			<version>1.0.7-SNAPSHOT</version>
+			<version>1.1.0</version>
 		</dependency>
 	</dependencies>
 
