@@ -1,9 +1,7 @@
-FROM docker.io/library/maven@sha256:90792644429ffe747eff698a00b8a288e373c4a871a81c62ffb90b8f70f98829 as builder
-RUN microdnf install -y gcc && useradd builder
+FROM docker.io/library/maven@sha256:90792644429ffe747eff698a00b8a288e373c4a871a81c62ffb90b8f70f98829 AS builder
+RUN microdnf install -y gcc
 WORKDIR /build
-RUN chown builder:builder /build
-USER builder
-COPY --chown=builder ./ ./
+COPY ./ ./
 
 RUN mvn package
 RUN mkdir -p out
