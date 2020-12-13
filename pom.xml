@@ -26,7 +26,7 @@
 	</developers>
 	<scm>
 		<connection>scm:git:git://github.com/boleynsu/oj.git</connection>
-		<url>https://boleyn.su/source/${project.artifactId}</url>
+		<url>https://boleyn.su/source/oj</url>
 	</scm>
 
 	<modules>
