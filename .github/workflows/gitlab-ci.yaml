@@ -1,0 +1,12 @@
+name: GitLab CI
+on: [push]
+jobs:
+  GitLab CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger GitLab CI
+        shell: bash
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          curl -X POST -F token="$GITLAB_TOKEN" -F ref=main -F "variables[FROM_GITHUB]=true" https://git.boleyn.su/api/v4/projects/98/trigger/pipeline
