@@ -1,7 +1,7 @@
 name: GitLab CI
 on: [push]
 jobs:
-  GitLab CI:
+  GitLab-CI:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger GitLab CI
