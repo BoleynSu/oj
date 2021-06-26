@@ -9,6 +9,9 @@ jobs:
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          echo $GITHUB_REF
-          ps aux
-          curl -s -X POST -F token="$GITLAB_TOKEN" -F ref=main -F "variables[FROM_GITHUB]=true" https://git.boleyn.su/api/v4/projects/98/trigger/pipeline >/dev/null
+          # GitHub-hosted runners execute code within ephemeral and clean isolated virtual machines,
+          # meaning there is no way to persistently compromise this environment, or otherwise gain
+          # access to more information than was placed in this environment during the bootstrap process.
+          # Thus, it is OK to include secrets in the commands line arguments
+          # See: https://docs.github.com/en/actions/learn-github-actions/security-hardening-for-github-actions#hardening-for-self-hosted-runners
+          curl -s -X POST -F token="$GITLAB_TOKEN" -F ref=main -F "variables[FROM_GITHUB]=true" -F "variables[GITHUB_REF]=$GITHUB_REF" https://git.boleyn.su/api/v4/projects/98/trigger/pipeline >/dev/null
