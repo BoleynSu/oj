@@ -24,8 +24,8 @@ html, body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto -21px;
-	padding: 0 0 21px;
+	margin: 0 auto -42px;
+	padding: 0 0 42px;
 }
 
 #footer {
