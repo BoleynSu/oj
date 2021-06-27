@@ -35,7 +35,7 @@ html, body {
 <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet"
 	href="/static/bootstrap/css/bootstrap-theme.min.css" />
-<script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>
+<script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/my.js"></script>
 </head>
