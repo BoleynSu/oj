@@ -6,7 +6,7 @@ COPY ./oj-c99runner/pom.xml ./oj-c99runner/
 COPY ./oj-core/pom.xml ./oj-core/
 COPY ./oj-judge/pom.xml ./oj-judge/
 COPY ./oj-server/pom.xml ./oj-server/
-RUN mvn dependency:go-offline
+RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
 WORKDIR /build
 COPY ./ ./
 
