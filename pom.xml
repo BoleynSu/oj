@@ -121,6 +121,7 @@
 				<configuration>
 					<excludes>
 						<exclude>org.webjars:bootstrap</exclude>
+						<exclude>org.webjars:jquery</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
