@@ -1,5 +1,12 @@
 FROM docker.io/library/maven@sha256:054143866bf2bdcb6104c410ef2fb5e47f3425924492d76aa20121b044eb469e AS builder
 RUN microdnf install -y gcc
+WORKDIR /cache
+COPY ./pom.xml ./
+COPY ./oj-c99runner/pom.xml ./oj-c99runner/
+COPY ./oj-core/pom.xml ./oj-core/
+COPY ./oj-judge/pom.xml ./oj-judge/
+COPY ./oj-server/pom.xml ./oj-server/
+RUN mvn dependency:go-offline
 WORKDIR /build
 COPY ./ ./
 
