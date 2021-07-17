@@ -14,7 +14,8 @@ jobs:
           # access to more information than was placed in this environment during the bootstrap process.
           # Thus, it is OK to include secrets in the commands line arguments.
           # See: https://docs.github.com/en/actions/learn-github-actions/security-hardening-for-github-actions#hardening-for-self-hosted-runners
-          echo "Deploying to staging environment at https://oj.boleynsu.tk ..."
+          echo "Deploying to the staging environment at https://oj.boleynsu.tk." &&
+          echo "It takes few minutes to be ready after the job has finished." &&
           curl -X POST -F token="$GITLAB_TOKEN"
                        -F ref=main
                        -F "variables[OJ_RUN_FROM_GITHUB]=true"
