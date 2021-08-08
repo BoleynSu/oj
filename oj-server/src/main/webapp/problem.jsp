@@ -36,6 +36,10 @@ html, body {
 #body {
 	padding-top: 40px;
 }
+
+pre {
+	white-space: pre-wrap;
+}
 </style>
 <link rel="stylesheet" href="/webjars/bootstrap/3.4.1/css/bootstrap.min.css" />
 <link rel="stylesheet"
