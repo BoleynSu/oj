@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 
 import io.grpc.Server;
-import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
+import io.grpc.netty.NettyServerBuilder;
 import io.grpc.stub.StreamObserver;
 import su.boleyn.oj.judge.Result;
 import su.boleyn.oj.judge.RunnerGrpc;

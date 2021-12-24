@@ -74,9 +74,9 @@
 		</plugins>
 		<resources>
 			<resource>
-				<directory>src/main/</directory>
+				<directory>src/</directory>
 				<includes>
-					<include>webapp/**/*</include>
+					<include>main/webapp/**/*</include>
 				</includes>
 			</resource>
 		</resources>

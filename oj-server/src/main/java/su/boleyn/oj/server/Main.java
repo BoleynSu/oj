@@ -18,7 +18,7 @@ import su.boleyn.oj.core.Config;
 public class Main extends Config {
 	static final String ADDRESS = getOrElse("ADDRESS", "0.0.0.0");
 	static final int PORT = Integer.parseInt(getOrElse("PORT", "8080"));
-	static final String WEBAPP = getOrElse("WEBAPP", "webapp");
+	static final String WEBAPP = getOrElse("WEBAPP", "main/webapp");
 
 	public static void main(String[] args) throws Exception {
 		Tomcat tomcat = new Tomcat();
