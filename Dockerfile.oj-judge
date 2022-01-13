@@ -15,7 +15,7 @@ RUN mkdir -p out
 RUN mvn help:evaluate -q -Dexpression=project.version -DforceStdout > out/version
 RUN mv oj-judge/target/oj-judge-$(cat out/version)-jar-with-dependencies.jar out/oj-judge.jar
 
-FROM docker.io/library/openjdk:11-jre@sha256:641ec29cbdb34d86d7a35dc1f05804dcc667b68af9a49dbf41bd985c6a1dba02
+FROM docker.io/library/openjdk:11-jre@sha256:eef1b54697ae4931d44e9c6948093b7deb8947d8656f6a949fc4408b6a57e7e5
 COPY --from=builder /build/out /oj-judge
 
 RUN useradd -r oj-judge
