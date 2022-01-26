@@ -15,7 +15,7 @@ RUN mkdir -p out
 RUN mvn help:evaluate -q -Dexpression=project.version -DforceStdout > out/version
 RUN mv oj-server/target/oj-server-$(cat out/version)-jar-with-dependencies.jar out/oj-server.jar
 
-FROM docker.io/library/openjdk:11-jre@sha256:83fcd4465fc94d089bfffe8e441e0c517bc8ba0fcf87e2dff3f400af0c4d29f7
+FROM docker.io/library/openjdk:11-jre@sha256:09b9932a4888e37ae4647acb1e31840143491c48a7d954845ba44a6947a899cc
 COPY --from=builder /build/out /oj-server
 
 RUN useradd -m -d /run/oj-server -r oj-server
