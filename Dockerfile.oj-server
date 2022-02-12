@@ -1,4 +1,4 @@
-FROM docker.io/library/maven@sha256:9949b7df3e4d6e2d0f73f0adfd4f3f39804e4ef84d4b0f41b7981405a3471445 AS builder
+FROM docker.io/library/maven@sha256:0acef805890e6ce17f9282efd66dbf34769e7d80aa3382b5058a3a07dd9b62d9 AS builder
 RUN microdnf install -y gcc
 WORKDIR /cache
 COPY ./pom.xml ./
@@ -15,7 +15,7 @@ RUN mkdir -p out
 RUN mvn help:evaluate -q -Dexpression=project.version -DforceStdout > out/version
 RUN mv oj-server/target/oj-server-$(cat out/version)-jar-with-dependencies.jar out/oj-server.jar
 
-FROM docker.io/library/openjdk:11-jre@sha256:6569ecf4473c692993d66f6dc73b975a4bc19596062fc35c0914abf19bec5685
+FROM docker.io/library/openjdk:11-jre@sha256:d71d6318107d1387d5977c0093416485906515f6dee28991e4a6e4ced4b78897
 COPY --from=builder /build/out /oj-server
 
 RUN useradd -m -d /run/oj-server -r oj-server
