@@ -1,4 +1,4 @@
-FROM docker.io/library/maven@sha256:5d3420a64e823ec4e1829e11ff1ecdac594ac84b14898b8be08fa01be17f21bb AS builder
+FROM docker.io/library/maven@sha256:7106ce47b5c226ee21bac386cb706ff9f3db7ac2f15e251e3aa491fcbfc30028 AS builder
 RUN microdnf install -y gcc
 WORKDIR /cache
 COPY ./pom.xml ./
