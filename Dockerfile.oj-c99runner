@@ -15,7 +15,7 @@ RUN mkdir -p out
 RUN mvn help:evaluate -q -Dexpression=project.version -DforceStdout > out/version
 RUN mv oj-c99runner/target/oj-c99runner-$(cat out/version)-jar-with-dependencies.jar out/oj-c99runner.jar
 
-FROM docker.io/library/openjdk:11-jre@sha256:abe67cbef4449cdbb22df9fca42af79c02fef4e78d974bec3f71b0e6ec1305d1
+FROM docker.io/library/openjdk:11-jre@sha256:900ead10189bb3198f84a476757aff801a7422801550ed2397fda35cca308933
 RUN apt update && apt install -y gcc && apt clean
 COPY --from=builder /build/out /oj-c99runner
 
