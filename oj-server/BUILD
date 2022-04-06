@@ -1,4 +1,4 @@
-load("@boleynsu_monorepo//config/build:rules.bzl", "container_push", "java_image", "skopeo_copy")
+load("@boleynsu//config/build:rules.bzl", "container_push", "java_image", "skopeo_copy")
 
 java_image(
     name = "oj-server",

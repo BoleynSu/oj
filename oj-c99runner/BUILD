@@ -1,5 +1,5 @@
 load(
-    "@boleynsu_monorepo//config/build:rules.bzl",
+    "@boleynsu//config/build:rules.bzl",
     "container_push",
     "docker_build",
     "java_image",

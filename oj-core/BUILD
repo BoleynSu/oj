@@ -1,4 +1,4 @@
-load("@boleynsu_monorepo//config/build:rules.bzl", "java_library")
+load("@boleynsu//config/build:rules.bzl", "java_library")
 
 java_library(
     name = "lib",

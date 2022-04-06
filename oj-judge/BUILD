@@ -1,5 +1,5 @@
 load(
-    "@boleynsu_monorepo//config/build:rules.bzl",
+    "@boleynsu//config/build:rules.bzl",
     "container_push",
     "java_grpc_library",
     "java_image",
