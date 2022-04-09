@@ -1,9 +1,9 @@
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@io_bazel_rules_docker//java:image.bzl", "java_image")
 load(
     "@boleynsu//config/build:rules.bzl",
     "container_push",
     "docker_build",
-    "java_image",
-    "pkg_tar",
     "skopeo_copy",
 )
 

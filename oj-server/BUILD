@@ -1,4 +1,5 @@
-load("@boleynsu//config/build:rules.bzl", "container_push", "java_image", "skopeo_copy")
+load("@io_bazel_rules_docker//java:image.bzl", "java_image")
+load("@boleynsu//config/build:rules.bzl", "container_push", "skopeo_copy")
 
 java_image(
     name = "oj-server",
