@@ -2,11 +2,6 @@ load("@io_bazel_rules_docker//java:image.bzl", "java_image")
 load("@rules_java//java:defs.bzl", "java_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@io_grpc_grpc_java//:java_grpc_library.bzl", "java_grpc_library")
-load(
-    "@boleynsu//config/build:rules.bzl",
-    "container_push",
-    "skopeo_copy",
-)
 
 proto_library(
     name = "proto",
@@ -42,16 +37,4 @@ java_image(
         "@io_grpc_grpc_java//api",
         "@maven//:javax_annotation_javax_annotation_api",
     ],
-)
-
-skopeo_copy(
-    name = "oj-judge.copy",
-    image = ":oj-judge",
-    image_name = "oj-judge",
-)
-
-container_push(
-    name = "oj-judge.push",
-    image = ":oj-judge",
-    image_name = "oj-judge",
 )

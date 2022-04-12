@@ -1,5 +1,4 @@
 load("@io_bazel_rules_docker//java:image.bzl", "java_image")
-load("@boleynsu//config/build:rules.bzl", "container_push", "skopeo_copy")
 
 java_image(
     name = "oj-server",
@@ -41,16 +40,4 @@ java_image(
         "@maven//:org_webjars_bootstrap",
         "@maven//:org_webjars_jquery",
     ],
-)
-
-skopeo_copy(
-    name = "oj-server.copy",
-    image = ":oj-server",
-    image_name = "oj-server",
-)
-
-container_push(
-    name = "oj-server.push",
-    image = ":oj-server",
-    image_name = "oj-server",
 )
