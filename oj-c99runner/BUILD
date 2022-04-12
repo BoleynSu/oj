@@ -1,20 +1,20 @@
-load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@io_bazel_rules_docker//container:container.bzl", "container_flatten", "container_image")
 load("@io_bazel_rules_docker//java:image.bzl", "java_image")
 load(
     "@boleynsu//config/build:rules.bzl",
     "container_push",
-    "docker_build",
     "skopeo_copy",
 )
 
-pkg_tar(
-    name = "base_image-context",
-    srcs = ["Dockerfile"],
+container_flatten(
+    name = "gcc",
+    image = "@docker_io_library_gcc//image",
 )
 
-docker_build(
+container_image(
     name = "base_image",
-    context = ":base_image-context",
+    base = "@java_image_base//image",
+    tars = [":gcc.tar"],
 )
 
 java_image(
