@@ -1,5 +1,5 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_flatten", "container_image")
-load("@io_bazel_rules_docker//java:image.bzl", "java_image")
+load("@io_bazel_rules_docker//java:image.bzl", "DEFAULT_JAVA_BASE", "java_image")
 
 container_flatten(
     name = "gcc",
@@ -8,7 +8,7 @@ container_flatten(
 
 container_image(
     name = "base_image",
-    base = "@java_image_base//image",
+    base = DEFAULT_JAVA_BASE,
     tars = [":gcc.tar"],
 )
 
