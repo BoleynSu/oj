@@ -3,7 +3,7 @@ load("@io_bazel_rules_docker//java:image.bzl", "DEFAULT_JAVA_BASE", "java_image"
 
 container_flatten(
     name = "gcc",
-    image = "@docker_io_library_gcc//image",
+    image = "@io_docker_library_gcc//image",
 )
 
 container_image(
