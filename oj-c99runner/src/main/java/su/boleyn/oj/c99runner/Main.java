@@ -39,6 +39,19 @@ public class Main extends RunnerGrpc.RunnerImplBase {
 		}
 	}
 
+	public static String getCC() {
+		Runtime r = Runtime.getRuntime();
+		for (String CC : new String[] { "gcc", "clang" }) {
+			try {
+				if (r.exec(new String[] { "/bin/sh", "-c", "which " + CC }).waitFor() == 0) {
+					return CC;
+				}
+			} catch (Exception e) {
+			}
+		}
+		return "false";
+	}
+
 	public static Result run(Task task) {
 		Result.Builder builder = Result.newBuilder();
 		try {
@@ -49,7 +62,7 @@ public class Main extends RunnerGrpc.RunnerImplBase {
 				out.write(task.getInput());
 			}
 			Runtime r = Runtime.getRuntime();
-			Process compile = r.exec(new String[] { "/bin/sh", "-c", "gcc -lm -std=c99 " + SOURCE_FILE + " -o " + BINARY_FILE });
+			Process compile = r.exec(new String[] { "/bin/sh", "-c", getCC() + " -lm -std=c99 " + SOURCE_FILE + " -o " + BINARY_FILE });
 			if (!compile.waitFor(15, TimeUnit.SECONDS) || compile.exitValue() != 0) {
 				compile.destroyForcibly();
 				builder.setResult("compilation error").setOutput("").setTime(0).setMemory(0);

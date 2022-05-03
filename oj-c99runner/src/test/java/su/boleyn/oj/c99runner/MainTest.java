@@ -31,7 +31,11 @@ public class MainTest {
         result = Main.run(builder.setInput("1 2").setSource(
                 "#include </dev/random>\nint main() { int a, b; scanf(\"%d%d\", &a, &b); printf(\"%d\", a + b); }")
                 .build());
-        assertEquals("compilation error", result.getResult());
+        if (Main.getCC().equals("clang")) {
+                assertEquals("accepted", result.getResult());
+        } else {
+                assertEquals("compilation error", result.getResult());
+        }
     }
 
     @Test
