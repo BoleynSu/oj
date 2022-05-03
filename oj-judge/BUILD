@@ -5,7 +5,7 @@ load("@io_grpc_grpc_java//:java_grpc_library.bzl", "java_grpc_library")
 
 proto_library(
     name = "proto",
-    srcs = ["src/main/proto/runner.proto"],
+    srcs = ["src/main/proto/su/boleyn/oj/judge/runner.proto"],
     visibility = ["//visibility:public"],
 )
 
