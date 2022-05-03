@@ -35,6 +35,5 @@ java_image(
         ":java_proto",
         "//oj-core:lib",
         "@io_grpc_grpc_java//api",
-        "@maven//:javax_annotation_javax_annotation_api",
     ],
 )
