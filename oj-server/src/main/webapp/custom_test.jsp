@@ -73,7 +73,7 @@ html, body {
                 $("#source").prop('disabled', false);
                 $("#input").prop('disabled', false);
                 $("#run").prop('disabled', false);
-            });g
+            });
             return false;
         });
     });
