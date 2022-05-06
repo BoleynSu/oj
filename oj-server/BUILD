@@ -21,6 +21,7 @@ java_image(
         "src/main/webapp/status.jsp",
         "src/main/webapp/submit.jsp",
         "src/main/webapp/submission.jsp",
+        "src/main/webapp/custom_test.jsp",
         # favicon
         "src/main/webapp/favicon.ico",
         # js
@@ -32,8 +33,14 @@ java_image(
         "src/main/webapp/static/editarea/**",
     ]),
     visibility = ["//visibility:public"],
+    runtime_deps = [
+        "@io_grpc_grpc_java//netty",
+    ],
     deps = [
         "//oj-core:lib",
+        "//oj-judge:java_grpc",
+        "//oj-judge:java_proto",
+        "@io_grpc_grpc_java//api",
         "@maven//:commons_io_commons_io",
         "@maven//:org_apache_tomcat_embed_tomcat_embed_core",
         "@maven//:org_apache_tomcat_embed_tomcat_embed_jasper",

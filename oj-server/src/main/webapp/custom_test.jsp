@@ -1,17 +1,10 @@
 <%@page pageEncoding="utf-8" language="java"
-	import="su.boleyn.oj.server.User"%>
-<%
+	import="su.boleyn.oj.server.User, jakarta.servlet.jsp.SkipPageException"%><%
 	User user = new User(request, response);
 	String pid = user.get("pid");
-	if (user.isSubmit()) {
-		if (!user.hasLogin()) {
-			user.go("Please login first.", "/login");
-		} else {
-			if (user.submit())
-				user.go("Successfully submitted.", "/status?cid=" + user.get("cid"));
-			else
-				user.go("An error occured. Try to submit again.", "/submit?cid=" + user.get("cid"));
-		}
+	if (user.isRunCustomTest()) {
+        user.runCustomTest();
+		throw new jakarta.servlet.jsp.SkipPageException();
 	}
 %>
 <!doctype html>
@@ -57,7 +50,26 @@ html, body {
 		word_wrap : true,
 		language : "en",
 		syntax : "c"
-	});
+    });
+    $(function () {
+        $("#custom_test_form").submit(function () {
+            $("#source").prop('disabled', true);
+            $("#input").prop('disabled', true);
+            $("#run").prop('disabled', true);
+            var source = editAreaLoader.getValue("source");
+            var input = $("#input").val();
+            $("#output").val("Running...");
+            $("#output").val($.ajax({
+                type: "post",
+                data: { source: source, input: input },
+                async: false
+            }).responseText);
+            $("#source").prop('disabled', false);
+            $("#input").prop('disabled', false);
+            $("#run").prop('disabled', false);
+            return false;
+        });
+    });
 </script>
 </head>
 <body>
@@ -84,46 +96,25 @@ html, body {
 					</nav>
 				</div>
 				<div class="col-md-8" id="body">
-					<%
-						if (user.isContest()) {
-					%>
-					<article class="panel panel-default">
-						<header class="panel-heading">
-							<h1 class="panel-title"><%=user.getContestTitle()%></h1>
-						</header>
-						<div class="panel-body">
-							<ul class="nav nav-tabs">
-								<li><a href="/problemset?cid=<%=user.get("cid")%>">Problems</a></li>
-								<li class="active"><a
-									href="/submit?cid=<%=user.get("cid")%>">Submit</a></li>
-								<li><a href="/status?cid=<%=user.get("cid")%>">Status</a></li>
-								<li><a href="/standings?cid=<%=user.get("cid")%>">Standings</a></li>
-							</ul>
-							<%
-								}
-							%>
-							<h3>Submit</h3>
-							<form method="post">
-								<div class="form-group">
-									<label>Problem</label> <input class="form-control input-sm"
-										type="text" name="problem" value="<%=pid%>"
-										<%="".equals(pid) ? "" : "readonly"%> />
-								</div>
-								<div class="form-group">
-									<label>Source</label>
-									<textarea class="form-control" id="source" rows="18"
-										name="source" /></textarea>
-								</div>
-								<button class="btn btn-primary" type="submit">Submit</button>
-							</form>
-							<%
-								if (user.isContest()) {
-							%>
-						</div>
-					</article>
-					<%
-						}
-					%>
+                    <h3>Custom Test</h3>
+                    <form id="custom_test_form">
+                        <div class="form-group">
+                            <label>Source</label>
+                            <textarea class="form-control" id="source" rows="18"
+                                name="source" /></textarea>
+                        </div>
+                        <button class="btn btn-primary" id="run" type="submit">Run</button>
+                        <div class="form-group row">
+                            <span class="col-md-6">
+                                <label>Input</label>
+                                <textarea class="form-control" id="input" rows="10" name="input" /></textarea>
+                            </span>
+                            <span class="col-md-6">
+                                <label>Output</label>
+                                <textarea class="form-control" id="output" rows="10" name="output" disabled /></textarea>
+                            </span>
+                        </div>
+                    </form>
 				</div>
 			</div>
 		</div>
@@ -139,3 +130,4 @@ html, body {
 	</div>
 </body>
 </html>
+

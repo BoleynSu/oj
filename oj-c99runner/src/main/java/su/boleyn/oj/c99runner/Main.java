@@ -52,7 +52,7 @@ public class Main extends RunnerGrpc.RunnerImplBase {
 		return "false";
 	}
 
-	public static Result run(Task task) {
+	public static synchronized Result run(Task task) {
 		Result.Builder builder = Result.newBuilder();
 		try {
 			try (PrintWriter out = new PrintWriter(SOURCE_FILE)) {
@@ -62,15 +62,17 @@ public class Main extends RunnerGrpc.RunnerImplBase {
 				out.write(task.getInput());
 			}
 			Runtime r = Runtime.getRuntime();
-			Process compile = r.exec(new String[] { "/bin/sh", "-c", getCC() + " -lm -std=c99 " + SOURCE_FILE + " -o " + BINARY_FILE });
-			if (!compile.waitFor(15, TimeUnit.SECONDS) || compile.exitValue() != 0) {
+			Process compile = r.exec(new String[] { "/bin/sh", "-c", getCC() + " -lm -std=c99 " + SOURCE_FILE + " -o " + BINARY_FILE + " >" + OUTPUT_FILE + " 2>&1" });
+			if (!compile.waitFor(15, TimeUnit.SECONDS)) {
 				compile.destroyForcibly();
-				builder.setResult("compilation error").setOutput("").setTime(0).setMemory(0);
+				builder.setResult("compilation error").setOutput("error: it takes more than 15s to compile your program.").setTime(0).setMemory(0);
+			} else if (compile.exitValue() != 0) {
+				builder.setResult("compilation error").setOutput(read(OUTPUT_FILE)).setTime(0).setMemory(0);
 			} else {
 				Process run = r.exec(new String[] { "/bin/sh", "-c", BINARY_FILE + " < " + INPUT_FILE + " > " + OUTPUT_FILE });
 				if (!run.waitFor(5, TimeUnit.SECONDS)) {
 					run.destroyForcibly();
-					builder.setResult("time limit exceeded").setOutput("").setTime(5000).setMemory(0);
+					builder.setResult("time limit exceeded").setOutput("error: it takes more than 5s to run your program.").setTime(5000).setMemory(0);
 				} else {
 					builder.setResult("accepted").setOutput(read(OUTPUT_FILE)).setTime(0).setMemory(0);
 				}

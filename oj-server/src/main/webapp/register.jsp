@@ -63,6 +63,7 @@ html, body {
 							<li><a href="/status">Status</a></li>
 							<li><a href="/standings">Standings</a></li>
 							<li><a href="/contests">Contests</a></li>
+							<li><a href="/custom_test">Custom Test</a></li>
 							<li><a href="/login">Login</a></li>
 							<li class="active"><a href="/register">Register</a></li>
 						</ul>

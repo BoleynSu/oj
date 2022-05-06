@@ -121,4 +121,14 @@
 		<servlet-name>chat</servlet-name>
 		<url-pattern>/chat</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>custom_test</display-name>
+		<servlet-name>custom_test</servlet-name>
+		<jsp-file>/custom_test.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>custom_test</servlet-name>
+		<url-pattern>/custom_test</url-pattern>
+	</servlet-mapping>
 </web-app>

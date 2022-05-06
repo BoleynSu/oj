@@ -1,10 +1,13 @@
 package su.boleyn.oj.server;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,8 +15,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import su.boleyn.oj.core.Config;
 import su.boleyn.oj.core.FileUtils;
 import su.boleyn.oj.core.SQL;
+import su.boleyn.oj.judge.RunnerGrpc;
+import su.boleyn.oj.judge.Task;
 
 public class User extends Config {
+	private static final String RUNNER_HOST = getOrElse("RUNNER_HOST", "localhost");
+	private static final int RUNNER_PORT = Integer.parseInt(getOrElse("RUNNER_PORT", "1993"));
+	private static final ManagedChannel channel = ManagedChannelBuilder.forAddress(RUNNER_HOST, RUNNER_PORT).usePlaintext()
+			.maxInboundMessageSize(100 * 1024 * 1024).build();
+	private static final RunnerGrpc.RunnerBlockingStub runner = RunnerGrpc.newBlockingStub(channel);
+
 	static final String ADMIN_ACCOUNT = "boleynsu";
 
 	private HttpServletRequest request;
@@ -102,6 +113,24 @@ public class User extends Config {
 
 	public boolean isSubmit() {
 		return !("".equals(get("problem")) || "".equals(get("source")));
+	}
+
+	public boolean isRunCustomTest() {
+		return !"".equals(get("source"));
+	}
+
+	public void runCustomTest() throws IOException {
+		PrintWriter out = response.getWriter();
+		if (!hasLogin()) {
+			out.println("Please login in firet.");
+		} else {
+			Task task = Task.newBuilder().setSource(get("source")).setInput(get("input")).build();
+			String output = runner.run(task).getOutput();
+			if (output.length() > 1024*4) {
+				output = "Only the first 4k chars are shown.\n" + output.substring(0, 1024 * 4);
+			}
+			out.println(output);
+		}
 	}
 
 	public boolean hasLogin() {
