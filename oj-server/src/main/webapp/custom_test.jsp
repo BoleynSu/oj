@@ -53,20 +53,27 @@ html, body {
     });
     $(function () {
         $("#custom_test_form").submit(function () {
+            var source = editAreaLoader.getValue("source");
+            var input = $("#input").val();
+            if (source == "" && input == "") {
+                return false;
+            }
             $("#source").prop('disabled', true);
             $("#input").prop('disabled', true);
             $("#run").prop('disabled', true);
-            var source = editAreaLoader.getValue("source");
-            var input = $("#input").val();
             $("#output").val("Running...");
-            $("#output").val($.ajax({
+            $.ajax({
                 type: "post",
                 data: { source: source, input: input },
-                async: false
-            }).responseText);
-            $("#source").prop('disabled', false);
-            $("#input").prop('disabled', false);
-            $("#run").prop('disabled', false);
+            }).fail(function () {
+                $("#output").val("An error has occurred!");
+            }).done(function (data) {
+                $("#output").val(data);
+            }).always(function () {
+                $("#source").prop('disabled', false);
+                $("#input").prop('disabled', false);
+                $("#run").prop('disabled', false);
+            });g
             return false;
         });
     });
