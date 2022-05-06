@@ -84,12 +84,11 @@ html, body {
 						<ul class="nav nav-pills nav-stacked">
 							<li><a href="/">Home</a></li>
 							<li><a href="/problemset">Problem set</a></li>
-							<li <%if (!user.isContest()) {%> class="active" <%}%>><a
-								href="/submit">Submit</a></li>
+							<li><a href="/submit">Submit</a></li>
 							<li><a href="/status">Status</a></li>
 							<li><a href="/standings">Standings</a></li>
 							<li><a href="/contests">Contests</a></li>
-							<li><a href="/custom_test">Custom Test</a></li>
+							<li class="active"><a href="/custom_test">Custom Test</a></li>
 							<li><a href="/login">Login</a></li>
 							<li><a href="/register">Register</a></li>
 						</ul>
